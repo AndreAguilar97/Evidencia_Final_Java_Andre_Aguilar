@@ -14,6 +14,10 @@ public class Alta_Paciente extends JFrame {
     private JButton btnVerificar;
     private JPanel MiPanel;
     private JTextField txtEdad;
+    private JLabel lblID;
+    private JTextField txtID;
+    private JButton btnGenerarID;
+    private JButton btnBuscar;
 
     public Alta_Paciente() {
         btnLimpiar.addActionListener(new ActionListener() {
