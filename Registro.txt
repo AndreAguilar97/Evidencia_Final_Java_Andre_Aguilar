@@ -1,0 +1,12 @@
+Nombre:Gerardo Aguilar
+Email:gerardo@hotmail.com
+Edad:20
+Tipo de Usuario:Paciente
+Contraseña:12345
+
+Nombre:Rallen Ramos Jorge
+Email:rallen@hotmail.com
+Edad:20
+Tipo de Usuario:Doctor
+Contraseña:12345
+
