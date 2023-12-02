@@ -16,7 +16,7 @@ public class Alta_Doctor extends JFrame {
     private JButton btnLimpiar;
     private JTextField txtEspecialidad;
     private JTextField txtTelefono;
-    private JPanel MiPanel;
+    public JPanel MiPanel;
     private JTextField txtEmail;
     private JComboBox comboBox1;
     private JButton btnVerificar;

@@ -16,7 +16,7 @@ public class Alta_Paciente extends JFrame {
     private JButton btnRegistrar;
     private JButton btnLimpiar;
     private JButton btnVerificar;
-    private JPanel MiPanel;
+    public JPanel MiPanel;
     private JTextField txtEdad;
     private JLabel lblID;
     private JTextField txtID;
