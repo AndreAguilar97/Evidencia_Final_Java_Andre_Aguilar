@@ -2,11 +2,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
 public class Alta_Doctor extends JFrame {
-    private JButton registrarButton;
+    private JButton btnRegistrar;
     private JTextField txtID;
     private JTextField txtNombres;
     private JTextField txtApMat;
@@ -22,6 +24,8 @@ public class Alta_Doctor extends JFrame {
     private JTextField txtBusquedaID;
     private JButton btnBuscar;
     private JLabel lblBuscaID;
+    private JButton btnEliminar;
+    private JButton btnConsultarLista;
 
     public Alta_Doctor() {
         btnLimpiar.addActionListener(new ActionListener() {
@@ -48,26 +52,25 @@ public class Alta_Doctor extends JFrame {
                 InsertarIDentxtID();
             }
         });
-        registrarButton.addActionListener(new ActionListener() {
+        btnRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 InsertarenArchivo();
             }
         });
+        btnEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                eliminarDoctor();
+            }
+        });
+        btnConsultarLista.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                consultarListaDoctores();
+            }
+        });
     }
-
-    public void limpiarCampos() {
-        txtID.setText("");
-        txtNombres.setText("");
-        txtApPat.setText("");
-        txtApMat.setText("");
-        txtEspecialidad.setText("");
-        txtTelefono.setText("");
-        txtEmail.setText("");
-        txtBusquedaID.setText("");
-        JOptionPane.showMessageDialog(this, "Datos Limpiados");
-    }
-
     public class Doctor {
         private String ID;
         private String Nombres;
@@ -98,6 +101,18 @@ public class Alta_Doctor extends JFrame {
         }
     }
 
+    public void limpiarCampos() {
+        txtID.setText("");
+        txtNombres.setText("");
+        txtApPat.setText("");
+        txtApMat.setText("");
+        txtEspecialidad.setText("");
+        txtTelefono.setText("");
+        txtEmail.setText("");
+        txtBusquedaID.setText("");
+        JOptionPane.showMessageDialog(this, "Datos Limpiados");
+    }
+
     public void verificarCampos() {
         String ID = txtID.getText();
         String Nombres = txtNombres.getText();
@@ -119,7 +134,7 @@ public class Alta_Doctor extends JFrame {
         String Documento = "Doctores.txt";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Documento, true))) {
-            writer.write(newDoc.ID + ", " + newDoc.Nombres + ", " + newDoc.ApPat + ", " + newDoc.ApMat + ", " + newDoc.Especialidad + ", " + newDoc.Telefono + ", " + newDoc.Email);
+            writer.write(newDoc.ID + ", " + newDoc.Nombres + ", " + newDoc.ApPat + ", " + newDoc.ApMat + ", "  + newDoc.Especialidad + ", "  + newDoc.Telefono + ", " + newDoc.Email+"\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -162,7 +177,7 @@ public class Alta_Doctor extends JFrame {
                 if (partes.length == 7) {
                     String idDoctor = partes[0].trim();
                     if (idDoctor.equals(ID)) {
-                        return new Doctor(partes[0], partes[1], partes[2], partes[3],partes[4],partes[5], partes [6]);
+                        return new Doctor(idDoctor, partes[1], partes[2], partes[3],partes[4],partes[5], partes [6]);
                     }
                 }
             }
@@ -181,10 +196,10 @@ public class Alta_Doctor extends JFrame {
             if (finded != null) {
                 JOptionPane.showMessageDialog(this, "Doctor encontrado:\n" +
                         "ID: " + finded.ID + "\n" +
-                        "Nombre(s): " + finded.Nombres + finded.ApPat + finded.ApMat+ "\n"+
+                        "Nombre(s): " + finded.Nombres + " " + finded.ApPat + " " + finded.ApMat+ "\n"+
                         "Especialidad: " + finded.Especialidad+"\n"+
-                        "Teléfono" + finded.Telefono + "\n"+
-                        "E-Mail" + finded.Email);
+                        "Teléfono: " + finded.Telefono + "\n"+
+                        "E-Mail: " + finded.Email);
             } else {
                 JOptionPane.showMessageDialog(this, "No se encontró un doctor con ese ID.");
             }
@@ -198,6 +213,74 @@ public class Alta_Doctor extends JFrame {
         p.setSize(700, 500);
         p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         p.setVisible(true);
+    }
+
+    private void eliminarDoctor(){
+        String idEliminar = txtBusquedaID.getText();
+        if (!idEliminar.isEmpty()){
+            String documento = "Doctores.txt";
+            List<String> lineas =new ArrayList<>();
+
+            try (BufferedReader lector = new BufferedReader(new FileReader(documento))) {
+                String linea;
+                boolean doctorEncontrado = false;
+
+                while ((linea = lector.readLine()) != null) {
+                    String[] partes = linea.split(", ");
+                    if (partes.length == 7) {
+                        String idDoctor = partes[0].trim();
+                        if (!idDoctor.equals(idEliminar)) {
+                            lineas.add(linea);
+                        } else {
+                            doctorEncontrado = true;
+                        }
+                    }
+                }
+
+                if (!doctorEncontrado) {
+                    JOptionPane.showMessageDialog(this, "Especialista no encontrado con ese ID");
+                    return;
+                }
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(documento))){
+                for (String linea:lineas){
+                    writer.write(linea+"\n");
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al tratar de eliminar al especialista");
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, "Especialista eliminado");
+        } else {
+            JOptionPane.showMessageDialog(this, "Inngrese un ID para eliminar. ");
+        }
+    }
+
+    private void consultarListaDoctores(){
+        String documento = "Doctores.txt";
+
+        try (BufferedReader lector = new BufferedReader(new FileReader(documento))){
+            StringBuilder datosDoctores = new StringBuilder();
+            String linea;
+
+            while ((linea = lector.readLine()) != null) {
+                datosDoctores.append(linea).append("\n");
+            }
+
+            if (datosDoctores.length()>0){
+                JOptionPane.showMessageDialog(this, "Especialistas: \n"+datosDoctores.toString());
+            } else {
+                JOptionPane.showMessageDialog(this, "No existen registros de especialistas");
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al consultar datos de especialistas");
+        }
     }
 }
 

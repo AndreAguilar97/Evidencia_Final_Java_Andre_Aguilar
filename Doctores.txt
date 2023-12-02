@@ -1,2 +1,4 @@
-
 D19120, Gerardo Andre, Juarez, Aguilar, Cardiologia, 9982771430, andreauditore@hotmail.com
+D18819, Pedro, León, Suárez, Ornitología, 14367497, ornito@hotmial.com
+D15821, Lolita , Rodiguez, Ayala, Cardiologia, 89467584, lolita@hotmail.com
+D17442, Hugo, Aguilar, Contreras, Nada, 9982771429, huguito@hotmail.com
