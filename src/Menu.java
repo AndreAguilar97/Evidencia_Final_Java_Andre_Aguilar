@@ -28,6 +28,12 @@ public class Menu extends JFrame{
                 cerrarSesion();
             }
         });
+        btnGenerarCita.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {crearCitas();
+
+            }
+        });
     }
 
     private void irDoctores(){
@@ -54,6 +60,16 @@ public class Menu extends JFrame{
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  // Ajusta según tus necesidades
         frame.pack();
         frame.setVisible(true);
+    }
+    private void crearCitas(){
+        this.dispose();
+        CrearCitas crearCitas = new CrearCitas();
+        JFrame frame = new JFrame("CrearCitas");
+        frame.setContentPane(crearCitas.MiPanel);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+
     }
 
     private void cerrarSesion(){

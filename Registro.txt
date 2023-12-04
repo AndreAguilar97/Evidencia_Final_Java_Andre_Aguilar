@@ -10,3 +10,21 @@ Edad:20
 Tipo de Usuario:Doctor
 Contraseña:12345
 
+Email:pedrosola@gmail.com
+Contraseña:12345
+Tipo de Usuario:Paciente
+Nombre:Pedro Sola Martinez
+Edad:20
+
+Email:andreaguilar@gmail.com
+Contraseña:117
+Tipo de Usuario:Doctor
+Nombre:Gerardo Andre Aguilar Juarez
+Edad:26
+
+Email:doctormario@yahoo.mx
+Contraseña:herewego
+Tipo de Usuario:Doctor
+Nombre:Mario
+Edad:60
+
