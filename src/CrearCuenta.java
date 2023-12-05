@@ -1,3 +1,8 @@
+/* Autor. Gerardo André Aguilar Juárez
+Fecha de entrega: Jueves 07 de Diciembre del 2023
+ */
+
+//Librerías utilizadas
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,6 +10,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+//Componentes de la interfaz gráfica.
+/*Se definen componentes de la interfaz gráfica (campos de texto, botones, etc.).
+        Estos elementos son utilizados para la entrada de datos, botones de acción y visualización de información en la GUI.*/
 public class CrearCuenta extends JFrame{
     private JTextField txtEdad;
     private JTextField txtEmail;
@@ -31,7 +39,8 @@ public class CrearCuenta extends JFrame{
         });
     }
 
-    private void guardarDatos() {
+    //Métodos de la clase
+    private void guardarDatos() {//Recopila datos de la interfaz, valida la información y guarda los datos en un archivo (Registro.txt).
         String nombre = txtNombre.getText();
         String email = txtEmail.getText();
         String edadStr = txtEdad.getText();
@@ -73,7 +82,7 @@ public class CrearCuenta extends JFrame{
         }
     }
 
-    private void regresarAVentanaLogin() {
+    private void regresarAVentanaLogin() { //Cierra la ventana actual y muestra la ventana de inicio de sesión (Login).
         // Cerrar la ventana actual
         this.dispose();
 
@@ -86,6 +95,7 @@ public class CrearCuenta extends JFrame{
         frame.setVisible(true);
     }
 
+    //Método principal que inicia la aplicación, creando una instancia de la clase CrearCuenta y mostrando la interfaz gráfica.
     public static void main(String[] args) {
         CrearCuenta registro = new CrearCuenta();
         registro.setContentPane(registro.MiPanel);

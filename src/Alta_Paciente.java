@@ -1,3 +1,8 @@
+/* Autor. Gerardo André Aguilar Juárez
+Fecha de entrega: Jueves 07 de Diciembre del 2023
+ */
+
+//Librerías utilizadas
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+//Componentes de la interfaz gráfica.
+/*Se definen componentes de la interfaz gráfica (campos de texto, botones, etc.).
+        Estos elementos son utilizados para la entrada de datos, botones de acción y visualización de información en la GUI.*/
 public class Alta_Paciente extends JFrame {
     private JTextField txtNombres;
     private JTextField txtApPat;
@@ -26,7 +34,7 @@ public class Alta_Paciente extends JFrame {
     private JTextField txtBusquedaID;
     private JButton btnEliminar;
     private JButton btnConsultarLista;
-
+    // Configuración de ActionListeners para los botones
     public Alta_Paciente() {
         btnLimpiar.addActionListener(new ActionListener() {
             @Override
@@ -70,6 +78,7 @@ public class Alta_Paciente extends JFrame {
         });
     }
 
+    //Método principal que inicia la aplicación, creando una instancia de la clase Alta_Paciente y mostrando la interfaz gráfica.
     public static void main(String[] args) {
         Alta_Paciente d = new Alta_Paciente();
         d.setContentPane(d.MiPanel);
@@ -77,6 +86,8 @@ public class Alta_Paciente extends JFrame {
         d.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         d.setVisible(true);
     }
+
+    //COnstructor de la clase interna Paciente donde se definen los atributos
     public class Paciente {
         private String ID;
         private String Nombres;
@@ -86,6 +97,7 @@ public class Alta_Paciente extends JFrame {
         private String Email;
         private int Edad;
 
+        // Constructor por defecto
         public Paciente() {
             ID = "";
             Nombres = "";
@@ -95,6 +107,7 @@ public class Alta_Paciente extends JFrame {
             Email = "";
             Edad = 0;
         }
+        // Constructor con parámetros
         public Paciente (String ID, String Nombres, String ApPat, String ApMat, String Telefono, String Email, int Edad){
             this.ID = ID;
             this.Nombres = Nombres;
@@ -106,7 +119,8 @@ public class Alta_Paciente extends JFrame {
         }
     }
 
-    private void limpiarCampos() {
+    //Métodos de la clase.
+    private void limpiarCampos() { //Limpia los campos de la GUI y muestra un mensaje de confirmación.
         txtID.setText("");
         txtNombres.setText("");
         txtApPat.setText("");
@@ -116,7 +130,7 @@ public class Alta_Paciente extends JFrame {
         txtEdad.setText("");
         JOptionPane.showMessageDialog(this, "Datos Limpiados");
     }
-    private void verificarCampos(){
+    private void verificarCampos(){ //Verifica si todos los campos obligatorios están completos antes de registrar un paciente.
         String ID = txtID.getText();
         String Nombres = txtNombres.getText();
         String ApPat = txtApPat.getText();
@@ -139,7 +153,7 @@ public class Alta_Paciente extends JFrame {
         }
     }
 
-    private void InsertarPaciente(Paciente newPac) {
+    private void InsertarPaciente(Paciente newPac) { //Inserta un nuevo paciente en un archivo de texto.
         String Documento = "Pacientes.txt";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Documento, true))) {
@@ -149,7 +163,7 @@ public class Alta_Paciente extends JFrame {
         }
     }
 
-    private void InsertarenArchivo() {
+    private void InsertarenArchivo() { //Obtiene datos de la GUI y llama a InsertarPaciente.
         String ID = txtID.getText();
         String Nombres = txtNombres.getText();
         String ApPat = txtApPat.getText();
@@ -167,18 +181,18 @@ public class Alta_Paciente extends JFrame {
         }
     }
 
-    private int GenerarId() {
+    private int GenerarId() { //Genera un ID aleatorio para los pacientes.
         Random numrandom = new Random();
         return numrandom.nextInt(10000) + 10000;
     }
 
-    private void InsertarIDentxtID() {
+    private void InsertarIDentxtID() { //Genera y muestra un ID aleatorio en el campo de texto txtID.
         int idrandom = GenerarId();
         String idrandstr = "P" + idrandom;
         txtID.setText(idrandstr);
     }
 
-    private Alta_Paciente.Paciente BuscarPacientePorId(String ID) {
+    private Alta_Paciente.Paciente BuscarPacientePorId(String ID) { //Busca un paciente por su ID en el archivo de texto.
         String Documento = "Pacientes.txt";
         try (BufferedReader lector = new BufferedReader(new FileReader(Documento))) {
             String linea;
@@ -198,7 +212,7 @@ public class Alta_Paciente extends JFrame {
         return null;
     }
 
-    private void BuscarPorID() {
+    private void BuscarPorID() { //Obtiene un ID desde la GUI y muestra la información del paciente correspondiente.
         String idBusqueda = txtBusquedaID.getText();
 
         if (!idBusqueda.isEmpty()) {
@@ -218,7 +232,7 @@ public class Alta_Paciente extends JFrame {
         }
     }
 
-    private void eliminarPaciente(){
+    private void eliminarPaciente(){ //Elimina un paciente del archivo de texto por su ID.
         String idEliminar = txtBusquedaID.getText();
         if (!idEliminar.isEmpty()){
             String documento = "Pacientes.txt";
@@ -264,7 +278,7 @@ public class Alta_Paciente extends JFrame {
         }
     }
 
-    private void consultarListaPacientes(){
+    private void consultarListaPacientes(){ //Muestra todos los pacientes registrados en el archivo de texto.
         String documento = "Pacientes.txt";
 
         try (BufferedReader lector = new BufferedReader(new FileReader(documento))){

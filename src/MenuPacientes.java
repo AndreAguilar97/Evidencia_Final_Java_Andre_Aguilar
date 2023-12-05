@@ -1,3 +1,8 @@
+/* Autor. Gerardo André Aguilar Juárez
+Fecha de entrega: Jueves 07 de Diciembre del 2023
+ */
+
+//Librerías utilizadas
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,6 +10,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+//Componentes de la interfaz gráfica.
+/*Se definen componentes de la interfaz gráfica (campos de texto, botones, etc.).
+        Estos elementos son utilizados para la entrada de datos, botones de acción y visualización de información en la GUI.*/
 public class MenuPacientes extends JFrame {
     private JButton btnDoctores;
     private JButton btnPacientes;
@@ -39,7 +47,7 @@ public class MenuPacientes extends JFrame {
         });
     }
 
-    private void abrirArchivo(String nombreArchivo) {
+    private void abrirArchivo(String nombreArchivo) { //Abre y lee el contenido de un archivo específico (Doctores.txt, Pacientes.txt o Citas.txt) y lo muestra en un cuadro de diálogo.
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             StringBuilder contenido = new StringBuilder();
             String linea;
@@ -56,7 +64,7 @@ public class MenuPacientes extends JFrame {
         }
     }
 
-    public void CerrarSesion(){
+    public void CerrarSesion(){//Cierra la sesión actual y abre la ventana de inicio de sesión (Login).
         Login ventanaLogin = new Login();
         JFrame frame = new JFrame("Login");
         frame.setContentPane(ventanaLogin.MiPanel);
@@ -66,7 +74,7 @@ public class MenuPacientes extends JFrame {
         this.dispose();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {//Método principal que inicia la aplicación, creando una instancia de la clase MenuPacientes y mostrando la interfaz gráfica.
         MenuPacientes menuPacientes = new MenuPacientes();
         menuPacientes.setContentPane(menuPacientes.MiPanel);
         menuPacientes.setSize(500,500);

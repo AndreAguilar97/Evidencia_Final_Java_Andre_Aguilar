@@ -28,3 +28,9 @@ Tipo de Usuario:Doctor
 Nombre:Mario
 Edad:60
 
+Email:doctristan@gmail.com
+Contraseña:12345
+Tipo de Usuario:Doctor
+Nombre:Trsitan Real
+Edad:20
+

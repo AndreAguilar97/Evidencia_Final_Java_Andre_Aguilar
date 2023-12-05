@@ -1,3 +1,8 @@
+/* Autor. Gerardo André Aguilar Juárez
+Fecha de entrega: Jueves 07 de Diciembre del 2023
+ */
+
+//Librerías utilizadas
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
+//Componentes de la interfaz gráfica.
 public class Alta_Doctor extends JFrame {
     private JButton btnRegistrar;
     private JTextField txtID;
@@ -27,6 +32,8 @@ public class Alta_Doctor extends JFrame {
     private JButton btnEliminar;
     private JButton btnConsultarLista;
 
+    //El constructor de la clase configura los listeners de eventos para los botones en la interfaz.
+    //Cada botón tiene asociado un ActionListener que define la acción a realizar cuando se presiona el botón.
     public Alta_Doctor() {
         btnLimpiar.addActionListener(new ActionListener() {
             @Override
@@ -71,6 +78,8 @@ public class Alta_Doctor extends JFrame {
             }
         });
     }
+    //Define la estructura de datos para representar a un Doctor con sus atributos como ID, Nombres, etc.
+    //Proporciona constructores para inicializar la clase.
     public class Doctor {
         private String ID;
         private String Nombres;
@@ -101,7 +110,8 @@ public class Alta_Doctor extends JFrame {
         }
     }
 
-    public void limpiarCampos() {
+    //Métodos de la clase Alta Doctor.
+    public void limpiarCampos() { // Limpia los campos de entrada en la GUI y muestra un mensaje de confirmación.
         txtID.setText("");
         txtNombres.setText("");
         txtApPat.setText("");
@@ -113,7 +123,7 @@ public class Alta_Doctor extends JFrame {
         JOptionPane.showMessageDialog(this, "Datos Limpiados");
     }
 
-    public void verificarCampos() {
+    public void verificarCampos() { //Verifica si todos los campos obligatorios están completos antes de registrar un doctor.
         String ID = txtID.getText();
         String Nombres = txtNombres.getText();
         String ApPat = txtApPat.getText();
@@ -130,7 +140,7 @@ public class Alta_Doctor extends JFrame {
         }
     }
 
-    private void InsertarDoctor(Doctor newDoc) {
+    private void InsertarDoctor(Doctor newDoc) { //Inserta un nuevo doctor en un archivo de texto.
         String Documento = "Doctores.txt";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Documento, true))) {
@@ -140,7 +150,7 @@ public class Alta_Doctor extends JFrame {
         }
     }
 
-    private void InsertarenArchivo() {
+    private void InsertarenArchivo() { //Obtiene datos de la GUI y llama a InsertarDoctor.
         String ID = txtID.getText();
         String Nombres = txtNombres.getText();
         String ApPat = txtApPat.getText();
@@ -157,18 +167,18 @@ public class Alta_Doctor extends JFrame {
         }
     }
 
-    private int GenerarId() {
+    private int GenerarId() { //Genera un ID aleatorio para los doctores
         Random numrandom = new Random();
         return numrandom.nextInt(10000) + 10000;
     }
 
-    private void InsertarIDentxtID() {
+    private void InsertarIDentxtID() { //Toma el producto de GenerarId y los inserta en el campo de texto txtID.
         int idrandom = GenerarId();
         String idrandstr = "D" + idrandom;
         txtID.setText(idrandstr);
     }
 
-    private Doctor BuscarDoctorPorId(String ID) {
+    private Doctor BuscarDoctorPorId(String ID) { //Busca un doctor por su ID en el archivo de texto.
         String Documento = "Doctores.txt";
         try (BufferedReader lector = new BufferedReader(new FileReader(Documento))) {
             String linea;
@@ -188,7 +198,7 @@ public class Alta_Doctor extends JFrame {
         return null;
     }
 
-    private void BuscarPorID() {
+    private void BuscarPorID() {   //Obtiene un ID desde la GUI y muestra la información del doctor correspondiente.
         String idBusqueda = txtBusquedaID.getText();
 
         if (!idBusqueda.isEmpty()) {
@@ -207,6 +217,8 @@ public class Alta_Doctor extends JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese un ID para realizar la búsqueda.");
         }
     }
+
+    //Método principal que inicia la aplicación, creando una instancia de la clase Alta_Doctor y mostrando la interfaz gráfica.
     public static void main (String[]args){
         Alta_Doctor p = new Alta_Doctor();
         p.setContentPane(p.MiPanel);
@@ -215,7 +227,7 @@ public class Alta_Doctor extends JFrame {
         p.setVisible(true);
     }
 
-    private void eliminarDoctor(){
+    private void eliminarDoctor(){ //Elimina un doctor del archivo de texto por su ID.
         String idEliminar = txtBusquedaID.getText();
         if (!idEliminar.isEmpty()){
             String documento = "Doctores.txt";
@@ -261,7 +273,7 @@ public class Alta_Doctor extends JFrame {
         }
     }
 
-    private void consultarListaDoctores(){
+    private void consultarListaDoctores(){  //Muestra todos los doctores registrados en el archivo de texto.
         String documento = "Doctores.txt";
 
         try (BufferedReader lector = new BufferedReader(new FileReader(documento))){

@@ -1,3 +1,8 @@
+/* Autor. Gerardo André Aguilar Juárez
+Fecha de entrega: Jueves 07 de Diciembre del 2023
+ */
+
+//Librerías utilizadas
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,6 +10,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+//Componentes de la interfaz gráfica.
+/*Se definen componentes de la interfaz gráfica (campos de texto, botones, etc.).
+        Estos elementos son utilizados para la entrada de datos, botones de acción y visualización de información en la GUI.*/
 public class Login extends JFrame {
     private JPasswordField pswContraseña;
     private JTextField txtEmail;
@@ -35,7 +43,7 @@ public class Login extends JFrame {
         });
     }
 
-    private void abrirVentanaCrearCuenta() {
+    private void abrirVentanaCrearCuenta() {//Cierra la ventana actual y abre una nueva ventana para crear una cuenta (CrearCuenta).
         // Cerrar la ventana actual
         this.dispose();
 
@@ -48,7 +56,7 @@ public class Login extends JFrame {
         frame.setVisible(true);
     }
 
-    private void abrirVentanaMenu(){
+    private void abrirVentanaMenu(){//Abre una ventana con funciones específicas para doctores (Menu), cerrando la ventana actual de inicio de sesión.
         // Crear e mostrar la ventana de funciones para doctores
         Menu menu = new Menu(); //
         JFrame frame = new JFrame("FUNCIONES HABILITADAS PARA ESPECIALISTAS");
@@ -61,7 +69,7 @@ public class Login extends JFrame {
         this.dispose();
     }
 
-    private void abrirMenuPacientes(){
+    private void abrirMenuPacientes(){ //Abre una ventana con funciones específicas para pacientes (MenuPacientes), cerrando la ventana actual de inicio de sesión.
         MenuPacientes menuPacientes = new MenuPacientes();
         JFrame frame = new JFrame("FUNCIONES HABILITADAS PARA PACIENTES");
         frame.setContentPane(menuPacientes.MiPanel);
@@ -73,7 +81,7 @@ public class Login extends JFrame {
         this.dispose();
     }
 
-    private void verificarCredencialesLogin() {
+    private void verificarCredencialesLogin() {//Verifica las credenciales ingresadas comparándolas con los registros almacenados en el archivo Registro.txt.
         String correoIngresado = txtEmail.getText().trim();
         char[] contraseñaIngresada = pswContraseña.getPassword();
         String contraseñaIngresadaStr = new String(contraseñaIngresada).trim();
@@ -138,7 +146,7 @@ public class Login extends JFrame {
         }
     }
 
-    private String obtenerValorDespuesDeCadena(String linea, String cadena) {
+    private String obtenerValorDespuesDeCadena(String linea, String cadena) {//Dada una línea y una cadena específica, devuelve el valor que sigue a esa cadena en la línea.
         int indiceCadena = linea.indexOf(cadena);
         if (indiceCadena != -1) {
             // Si la cadena se encuentra, devolver la parte después de la cadena
@@ -148,6 +156,8 @@ public class Login extends JFrame {
             return "";
         }
     }
+
+    //Método principal que inicia la aplicación, creando una instancia de la clase Login y mostrando la interfaz gráfica.
     public static void main(String[] args) {
          Login login = new Login ();
         login.setContentPane(login.MiPanel);

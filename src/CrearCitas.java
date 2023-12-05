@@ -1,3 +1,8 @@
+/* Autor. Gerardo André Aguilar Juárez
+Fecha de entrega: Jueves 07 de Diciembre del 2023
+ */
+
+//Librerías utilizadas
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +12,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//Componentes de la interfaz gráfica.
+/*Se definen componentes de la interfaz gráfica (campos de texto, botones, etc.).
+        Estos elementos son utilizados para la entrada de datos, botones de acción y visualización de información en la GUI.*/
 public class CrearCitas extends JFrame {
     private JTextField txtID;
     private JTextField txtFecha;
@@ -56,7 +64,8 @@ public class CrearCitas extends JFrame {
             }
         });
     }
-
+//Define la estructura de datos para representar una cita con sus atributos como paciente, id, fecha, etc.
+//Proporciona un constructor para inicializar la clase.
     public class Citas{
         private String paciente;
         private String id;
@@ -74,7 +83,9 @@ public class CrearCitas extends JFrame {
             this.observaciones = observaciones;
         }
     }
-    public void limpiarCampos(){
+
+    //Métodos de la clase CrearCitas
+    public void limpiarCampos(){//Limpia los campos de la GUI y muestra un mensaje de confirmación.
         txtID.setText("");
         txtFecha.setText("");
         txtHora.setText("");
@@ -83,7 +94,7 @@ public class CrearCitas extends JFrame {
         txtDatosPaciente.setText("");
         JOptionPane.showMessageDialog(this, "Datos limpiados con éxito");
     }
-    private void VerificarEInsertarEnArchivo(){
+    private void VerificarEInsertarEnArchivo(){//Verifica la validez de los campos y registra una nueva cita en un archivo.
         String idTxt = txtID.getText();
         String fecha = txtFecha.getText();
         String hora = txtHora.getText();
@@ -103,7 +114,7 @@ public class CrearCitas extends JFrame {
     }
 
 
-    private void buscarPacientePorID(String id) {
+    private void buscarPacientePorID(String id) {//Busca un paciente por su ID en el archivo de pacientes y muestra sus datos en la GUI.
         String documentoPacientes = "Pacientes.txt";
         boolean pacienteEncontrado = false;
 
@@ -156,7 +167,7 @@ public class CrearCitas extends JFrame {
         return datosFormateados;
     }
 
-    private boolean verificarFormatoFecha(String fecha) {
+    private boolean verificarFormatoFecha(String fecha) {//Extrae y formatea los datos de un paciente desde una línea del archivo de pacientes.
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
 
@@ -168,7 +179,7 @@ public class CrearCitas extends JFrame {
         }
     }
 
-    private boolean verificarFormatoHora(String hora) {
+    private boolean verificarFormatoHora(String hora) {//Verifica el formato de la fecha ingresada.
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         timeFormat.setLenient(false);
 
@@ -179,7 +190,7 @@ public class CrearCitas extends JFrame {
             return false;
         }
     }
-    private void InsertarCita(Citas newCita){
+    private void InsertarCita(Citas newCita){//Inserta una nueva cita en un archivo de texto.
         String Archivo = "Citas.txt";
 
         try(BufferedWriter escritor = new BufferedWriter(new FileWriter(Archivo, true))){
@@ -189,16 +200,17 @@ public class CrearCitas extends JFrame {
         }
     }
 
-    private int GenerarNumRandom(){
+    private int GenerarNumRandom(){//Genera un número aleatorio de 4 dígitos para ser utilizado en la generación de ID.
         Random random = new Random();
         return random.nextInt(9000)+1000;
     }
-    private void InsertarIDEnTextPanel() {
+    private void InsertarIDEnTextPanel() {//Toma el ID generado en el método anterior y lo inserta en el text panel con una letra para identificar el tipo de ID.
         int numran = GenerarNumRandom();
         String idRan = "C" + numran;
         txtID.setText(idRan);
     }
 
+    //Método principal que inicia la aplicación, creando una instancia de la clase CrearCitas y mostrando la interfaz gráfica.
     public static void main(String[] args) {
         CrearCitas citas = new CrearCitas();
         citas.setContentPane(citas.MiPanel);
